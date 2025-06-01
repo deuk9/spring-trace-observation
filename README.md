@@ -23,3 +23,7 @@
  - loki: log 수집
  - grafana: 대시보드
  - postgresql
+
+
+### 블로그 글 참고
+[deuk9.dev.blog](https://deuk9.github.io/)
