@@ -1,0 +1,59 @@
+
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5435/mydatabase
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database: postgresql
+    hibernate:
+      ddl-auto: update
+  kafka:
+    listener:
+      observation-enabled: true
+      ack-mode: manual
+    bootstrap-servers: localhost:29092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    consumer:
+      group-id: my-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    template:
+      observation-enabled: true
+  application:
+    name: my-monitoring-service
+
+management:
+
+  tracing:
+    sampling:
+      probability: 1.0
+    enabled: true
+  endpoints:
+    web:
+      exposure:
+        # Open up all Spring Boot Actuator endpoints for the demo, don't do this in production!
+        include: "*"
+
+  endpoint:
+    health:
+      show-details: always
+
+  metrics:
+    tags:
+      application: ${spring.application.name}
+      env: local
+
+  otlp:
+    tracing:
+      endpoint: "http://localhost:4317"
+      transport: grpc
+
+  opentelemetry:
+    resource-attributes:
+      some-attribute: some value
