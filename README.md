@@ -10,3 +10,16 @@
 
     implementation("net.ttddyy.observation:datasource-micrometer-spring-boot:1.1.1")
 ```
+
+- `micrometer-tracing-bridge-otel` micrometer 와 opentelemetery 를 호환되게함.
+- `loki-logback-appender` loki에 바로 append하는 라이브러리
+- `opentelemetry-exporter-otlp` trace 정보를 trace 수집기(tempo) 에 전송
+- `datasource-micrometer-spring-boot` datasource trace 데이터 수집을 위한 라이브러리
+
+
+### 사용한 인프라 스택
+ - docker
+ - tempo: trace 데이터 수집
+ - loki: log 수집
+ - grafana: 대시보드
+ - postgresql
